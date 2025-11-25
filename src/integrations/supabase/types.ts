@@ -14,7 +14,74 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      faq_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          category_id: string | null
+          created_at: string
+          display_order: number
+          id: string
+          is_published: boolean
+          question: string
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_published?: boolean
+          question: string
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_published?: boolean
+          question?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "faqs_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "faq_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
