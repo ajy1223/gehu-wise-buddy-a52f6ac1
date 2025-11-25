@@ -1,6 +1,7 @@
 import { FileText, Calendar, MapPin, AlertCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import examScheduleImage from "@/assets/exam-schedule.jpeg";
+import examScheduleImage1 from "@/assets/exam-schedule-1.png";
+import examScheduleImage2 from "@/assets/exam-schedule-2.png";
 
 const Examinations = () => {
   return (
@@ -68,12 +69,21 @@ const Examinations = () => {
               Schedule for End Semester ODD Term (Earlier Skill) Exams - November 2025
             </p>
           </div>
-          <div className="border rounded-lg overflow-hidden">
-            <img 
-              src={examScheduleImage} 
-              alt="GEHU Examination Schedule - November 2025" 
-              className="w-full h-auto"
-            />
+          <div className="space-y-4">
+            <div className="border rounded-lg overflow-hidden">
+              <img 
+                src={examScheduleImage1} 
+                alt="GEHU Examination Schedule Part 1 - November 2025" 
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="border rounded-lg overflow-hidden">
+              <img 
+                src={examScheduleImage2} 
+                alt="GEHU Examination Schedule Part 2 - November 2025" 
+                className="w-full h-auto"
+              />
+            </div>
           </div>
         </div>
       </Card>
