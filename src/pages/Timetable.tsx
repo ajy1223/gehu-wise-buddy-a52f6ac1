@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import timetableImage1 from "@/assets/timetable-1.png";
 import timetableImage2 from "@/assets/timetable-2.png";
 import timetableImage3 from "@/assets/timetable-3.jpg";
+import timetableImage4 from "@/assets/timetable-4.png";
 
 const Timetable = () => {
   return (
@@ -40,6 +41,14 @@ const Timetable = () => {
           <img 
             src={timetableImage3} 
             alt="B.Sc Animation and Gaming Timetable" 
+            className="w-full h-auto"
+          />
+        </Card>
+
+        <Card className="overflow-hidden">
+          <img 
+            src={timetableImage4} 
+            alt="B.Tech CSE Semester III Section C2 Timetable" 
             className="w-full h-auto"
           />
         </Card>
