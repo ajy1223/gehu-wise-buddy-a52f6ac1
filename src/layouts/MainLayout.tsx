@@ -1,5 +1,10 @@
-import { MessageSquare, LayoutGrid, Calendar, GraduationCap, Users, MapPin, BarChart3, HelpCircle, GraduationCapIcon, FileText } from "lucide-react";
+import { MessageSquare, LayoutGrid, Calendar, GraduationCap, Users, MapPin, BarChart3, HelpCircle, GraduationCapIcon, FileText, LogOut, User } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   Sidebar,
   SidebarContent,
@@ -28,6 +33,26 @@ const menuItems = [
 function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
+  const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user?.email) {
+        setUserEmail(session.user.email);
+      }
+    });
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Logged out successfully");
+      navigate("/login");
+    } catch (error: any) {
+      toast.error("Error logging out");
+    }
+  };
 
   return (
     <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
@@ -93,18 +118,29 @@ function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <div className="p-4 border-t border-border">
-        <div className="flex items-center gap-3 p-2 rounded-md bg-primary/10">
+      <div className="p-4 border-t border-border space-y-2">
+        <div className="flex items-center gap-3 p-2 rounded-md bg-muted">
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-            <span className="text-sm font-medium text-white">AI</span>
+            <User className="w-4 h-4 text-white" />
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium">GEHU AI Assistant</p>
-              <p className="text-xs text-muted-foreground truncate">Always here to help</p>
+              <p className="text-xs font-medium truncate">{userEmail}</p>
+              <p className="text-xs text-muted-foreground">Student</p>
             </div>
           )}
         </div>
+        {!collapsed && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={handleLogout}
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </Button>
+        )}
       </div>
     </Sidebar>
   );
