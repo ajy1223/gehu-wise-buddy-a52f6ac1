@@ -142,6 +142,26 @@ const FacultyDirectory = () => {
       </div>
 
       <div className="flex gap-4 mb-8">
+        <Button 
+          onClick={() => window.open('https://gehu.ac.in/dehradun/computer-application/faculty/', '_blank')}
+          className="flex-1"
+          size="lg"
+        >
+          <BookOpen className="w-5 h-5 mr-2" />
+          BCA Faculty - Official Page
+        </Button>
+        <Button 
+          onClick={() => window.open('https://gehu.ac.in/dehradun/computer-science-and-engineering/faculty/', '_blank')}
+          className="flex-1"
+          variant="secondary"
+          size="lg"
+        >
+          <BookOpen className="w-5 h-5 mr-2" />
+          B.Tech Faculty - Official Page
+        </Button>
+      </div>
+
+      <div className="flex gap-4 mb-8">
         <div className="flex-1">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
