@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const CAMPUS_MAIN_LOCATION = "https://www.google.com/local/place/fid/0x39092bca3fc0ccf3:0xd19900de8c24dbee/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3D7YwfjP1SRPfqDwRtHVr_HA%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D339.167%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFjdZd2ZqUDFTUlBmcUR3UnRIVnJfSEE%3D&sa=X&ved=2ahUKEwju98TE2Z6RAxWfVmwGHWZcHyUQpx96BAgsEBI";
+const CAMPUS_MAIN_LOCATION = "https://www.google.com/maps/place/Graphic+Era+Hill+University+%7C+Best+University+in+Dehradun+Uttarakhand/data=!4m2!3m1!1s0x0:0xd19900de8c24dbee?sa=X&ved=1t:2428&ictx=111";
 
 const VIRTUAL_TOURS = [
   { id: 1, url: "https://my.matterport.com/show/?m=Zo3xPetRXsv", name: "Virtual Campus Tour 1" },
