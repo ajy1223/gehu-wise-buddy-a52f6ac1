@@ -13,6 +13,8 @@ interface Location {
   position: { x: number; y: number };
 }
 
+const CAMPUS_MAIN_LOCATION = "https://www.google.com/maps/place/Graphic+Era+Hill+University/@30.2732634,78.0315788,17z/data=!3m1!4b1!4m6!3m5!1s0x39092bca3fc0ccf3:0xd19900de8c24dbee!8m2!3d30.2732634!4d78.0341537!16s%2Fg%2F11b6dq_3rz";
+
 const locations: Location[] = [
   {
     id: "admin",
@@ -135,6 +137,17 @@ const CampusLocations = () => {
         </div>
       </div>
 
+      <div className="mb-6">
+        <Button 
+          onClick={() => window.open(CAMPUS_MAIN_LOCATION, '_blank')}
+          className="w-full sm:w-auto"
+          size="lg"
+        >
+          <MapPin className="w-5 h-5 mr-2" />
+          View Full Campus on Google Maps
+        </Button>
+      </div>
+
       <div className="grid lg:grid-cols-3 gap-6 mb-8">
         <Card className="lg:col-span-2 p-6">
           <h3 className="text-xl font-bold mb-4">Interactive Campus Map</h3>
@@ -215,8 +228,13 @@ const CampusLocations = () => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">{selectedLocation.description}</p>
-              <Button className="w-full" variant="outline">
-                Get Directions
+              <Button 
+                className="w-full" 
+                variant="outline"
+                onClick={() => window.open(CAMPUS_MAIN_LOCATION, '_blank')}
+              >
+                <MapPin className="w-4 h-4 mr-2" />
+                View on Map
               </Button>
             </div>
           ) : (
