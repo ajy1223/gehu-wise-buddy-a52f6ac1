@@ -16,6 +16,7 @@ import FacultyDirectory from "./pages/FacultyDirectory";
 import CampusLocations from "./pages/CampusLocations";
 import Analytics from "./pages/Analytics";
 import FAQManagement from "./pages/FAQManagement";
+import AdminFAQ from "./pages/AdminFAQ";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
                     <Route path="/campus" element={<CampusLocations />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/faq" element={<FAQManagement />} />
+                    <Route path="/admin/faq" element={<AdminFAQ />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </MainLayout>

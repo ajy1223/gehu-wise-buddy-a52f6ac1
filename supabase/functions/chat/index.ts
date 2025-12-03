@@ -5,11 +5,55 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Input validation
+function validateMessages(messages: unknown): { valid: boolean; error?: string } {
+  if (!Array.isArray(messages)) {
+    return { valid: false, error: "messages must be an array" };
+  }
+  if (messages.length === 0) {
+    return { valid: false, error: "messages cannot be empty" };
+  }
+  if (messages.length > 20) {
+    return { valid: false, error: "messages cannot exceed 20 items" };
+  }
+  for (let i = 0; i < messages.length; i++) {
+    const msg = messages[i];
+    if (!msg || typeof msg !== "object") {
+      return { valid: false, error: `message at index ${i} is invalid` };
+    }
+    if (!msg.role || typeof msg.role !== "string") {
+      return { valid: false, error: `message at index ${i} must have a string role` };
+    }
+    if (!["user", "assistant", "system"].includes(msg.role)) {
+      return { valid: false, error: `message at index ${i} has invalid role` };
+    }
+    if (typeof msg.content !== "string") {
+      return { valid: false, error: `message at index ${i} must have string content` };
+    }
+    if (msg.content.length > 4000) {
+      return { valid: false, error: `message at index ${i} content exceeds 4000 characters` };
+    }
+  }
+  return { valid: true };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    const { messages } = body;
+    
+    // Validate input
+    const validation = validateMessages(messages);
+    if (!validation.valid) {
+      console.error("Validation error:", validation.error);
+      return new Response(JSON.stringify({ error: validation.error }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
